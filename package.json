@@ -1,0 +1,33 @@
+{
+  "name": "linkedin-backend",
+  "version": "1.0.0",
+  "description": "Linkedin Backend",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheSatyajitGain/linkedin-backend"
+  },
+  "keywords": [
+    "Linkedin",
+    "Backend"
+  ],
+  "author": "Satyajit Gain",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.0",
+    "nodemailer": "^7.0.5",
+    "validator": "^13.15.15"
+  }
+}
