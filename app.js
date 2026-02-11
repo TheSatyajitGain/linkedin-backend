@@ -12,7 +12,7 @@ const { userAuth } = require('./src/middlewares/userAuth.js');
 const updateProfileValidation = require('./utils/updateProfileValidation.js');
 const signUpValidation = require('./utils/signUpValidation.js');
 const validator = require('validator');
-const bcrypt = require('bcrypt');
+const bcryptjs = require(bcryptjs)
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const JWT = require('jsonwebtoken');
@@ -89,7 +89,7 @@ app.post('/signup', signUpRateLimit, signUpValidation, async (req, res) => {
       return res.status(409).json({ Error: 'User Name Not Available' });
     }
 
-    const passwordHash = await bcrypt.hash(password, 10);
+    const passwordHash = await bcryptjs.hash(password, 10);
     const userSignUp = new User({
       firstName,
       lastName,
@@ -156,7 +156,7 @@ app.post('/login', loginRateLimit, async (req, res) => {
       return res.status(404).json({ message: 'Invalid Credentials' });
     }
 
-    const comparePassword = await bcrypt.compare(password, user.password);
+    const comparePassword = await bcryptjs.compare(password, user.password);
     if (comparePassword) {
       const token = JWT.sign({ id: user._id }, process.env.JWT_SECRET);
       res.cookie('token', token, {
@@ -193,7 +193,7 @@ app.patch(
   async (req, res, next) => {
     try {
       if (req?.body?.password) {
-        const passwordHash = await bcrypt.hash(req.body.password, 10);
+        const passwordHash = await bcryptjs.hash(req.body.password, 10);
         req.body.password = passwordHash;
       }
       console.log(req.body);
